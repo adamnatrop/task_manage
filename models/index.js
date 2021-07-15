@@ -1,4 +1,5 @@
 const UserModel = require('./User');
-const TaskModel = require('./Task');
+const Tasks = require('./Task');
+const Columns = require('./Columns');
 
-module.exports = { UserModel, TaskModel }
+module.exports = { UserModel, Tasks, Columns }

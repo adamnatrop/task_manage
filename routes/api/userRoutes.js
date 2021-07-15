@@ -18,6 +18,7 @@ router.route('/logout')
 router.route('/current-session')
     .get(userController.currentSession)
 
-
+router.route('/columnsdata')
+    .get(userController.getColumns)
 
 module.exports = router;

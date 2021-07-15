@@ -1,5 +1,5 @@
 
-const { UserModel } = require('../models');
+const { UserModel, Tasks, Columns } = require('../models');
 
 module.exports = {
     register: async (req, res) => {
@@ -67,6 +67,15 @@ module.exports = {
         } else {
             res.send(false)
         }
+    },
+
+    getColumns: async (req, res) => {
+        console.log('HIT')
+       Columns
+        .find(req.query)
+        .then(columnsData => res.json(columnsData))
+        .catch(err => res.status(422).json(err));
+        
     }
 
 }

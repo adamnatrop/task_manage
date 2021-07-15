@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const taskController = require('../../controllers/taskController');
-const { TaskModel } = require("../../models");
+const { Tasks } = require("../../models");
 
 // URL PATH /api/task/
 

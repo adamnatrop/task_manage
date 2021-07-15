@@ -5,21 +5,21 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/task_manage");
 
 const taskDataSeed = [
     {
-        task: "take trash out",
-        status: "new"
+        content: "take trash out",
+        
     },
     {
-        task: "pick up drycleaning",
-        status: "wip"
+        content: "pick up drycleaning",
+        
     },
     {
-        task: "make dinner",
-        status: "completed"
+        content: "make dinner",
+        
     }
 ];
 
-db.TaskModel.remove({})
-.then(() => db.TaskModel.collection.insertMany(taskDataSeed))
+db.Tasks.remove({})
+.then(() => db.Tasks.collection.insertMany(taskDataSeed))
 .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
@@ -29,3 +29,30 @@ db.TaskModel.remove({})
     process.exit(1);
 });
 
+
+
+const columnsDataSeed = [
+    {
+        title: 'To Do:',
+        taskIds: ['ObjectId("60e8b5a49a34ca7c2037e8bb")', 'ObjectId("60e8b5a49a34ca7c2037e8bc")', 'ObjectId("60e8b5a49a34ca7c2037e8bd")']
+    },
+    {
+        title: 'In Progress',
+        taskIds: [],
+    },
+    {
+        title: 'Completed',
+        taskIds: [],
+    }
+];
+
+db.Columns.remove({})
+.then(() => db.Columns.collection.insertMany(columnsDataSeed))
+.then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+})
+.catch(err => {
+    console.error(err);
+    process.exit(1);
+});
