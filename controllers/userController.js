@@ -73,6 +73,7 @@ module.exports = {
         console.log('HIT')
        Columns
         .find(req.query)
+        .populate("taskIds")
         .then(columnsData => res.json(columnsData))
         .catch(err => res.status(422).json(err));
         

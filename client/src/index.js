@@ -17,21 +17,30 @@ const Container = styled.div`
 function App()  {
   const [state, setState] = useState({
     tasks: {},
-    columns: {},
+    columns: [],
     columnOrder: []
-
   })
   
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     API.getColumnsData()
       .then(res => {
         console.log(res.data)
-       
-      
+        
+        const newState = {
+          ...state,
+          columns: {
+            ...state.columns,
+            [state.columns]: res.data,
+          },
+        };
+    
+        setState(newState);
+        
       })
-   
-  },[])
+      console.log("state", state)
+  },[count])
 
 
 
@@ -119,6 +128,9 @@ function App()  {
         onDragEnd={onDragEnd}
         >
           <Container>
+            <button type="submit" onClick={() => setCount(+1)}>Counter
+
+            </button>
             {state.columnOrder.map(columnId => {
             const column = state.columns[columnId];
             const tasks = column.taskIds.map(taskIds => state.tasks[taskIds]);
