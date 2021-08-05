@@ -6,10 +6,16 @@ const columnsSchema = new Schema({
         type: String,
         required: true
     },
-    taskIds: {
-        type: Array,
-        required: true
-    }
+    taskIds: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "tasks"
+        },
+       
+    ]
+    
+    
+    
     
 
 }, {timestamps: true});

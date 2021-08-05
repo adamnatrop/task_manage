@@ -27,22 +27,13 @@ function App()  {
     API.getColumnsData()
       .then(res => {
         console.log(res.data)
-        // setState(prevState => {
-        //   return {...prevState, columns: res.data}
-        // })
-        setState({...state, columns: res.data})
-        //console.log('State', state)
-        checkState()
+       
+      
       })
-    // API.getTasksData()
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
+   
   },[])
 
-const checkState = () => {
-  console.log('State', state)
-}
+
 
   const onDragStart = () => {
     // function to modify attributes of a component on drag start

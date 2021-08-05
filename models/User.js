@@ -15,16 +15,12 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    tasks: [
+    columns: 
         {
             type: Schema.Types.ObjectId,
-            ref: "tasks"
+            ref: "columns"
         },
-    ],
-    columns: {
-        type: Schema.Types.ObjectId,
-        ref: "columns"
-    }
+    
     
    
 }, {timestamps: true});
