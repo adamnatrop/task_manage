@@ -14,7 +14,7 @@ export default function Task(props) {
     
         return (
             <Draggable 
-                draggableId={props.task.id} 
+                draggableId={props.task._id} 
                 index={props.index}
                 
             >
