@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import initialData from './initial-data';
+
 import Column from './column';
 import '@atlaskit/css-reset'
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -67,7 +67,7 @@ function App()  {
      
         setColumnOrder(orderArr);
         
-        console.log("tasksState", tasksState, "columns", columns, "ColumnOrder", columnOrder)
+        // console.log("tasksState", tasksState, "columns", columns, "ColumnOrder", columnOrder)
         
         
       })
@@ -167,13 +167,13 @@ function App()  {
   
     return (
       <>
-      { renderReady === true && (
+      { renderReady ? (
         <DragDropContext 
           onDragStart={onDragStart}
           onDragUpdate={onDragUpdate}
           onDragEnd={onDragEnd}
         >
-        { columnOrder.length > 1 && (
+        { columnOrder.length > 1 ? (
           
                
           <Container>
@@ -184,16 +184,20 @@ function App()  {
               })}
 
           </Container>
+         ) : (
+           <p>No Task Data to Load</p>
          )}
         
-        <p>Loading..still</p> 
+        
         </DragDropContext>
+      ) : (
+      <>
+        <p>Loading...</p>
+        <button type="submit" onClick={() => setCount(+1)}>Start App</button>
+      </>
       )}
 
-      <p>Loading...</p>
-      <button type="submit" onClick={() => setCount(+1)}>Counter
-
-      </button>
+     
       </>
     );
   
