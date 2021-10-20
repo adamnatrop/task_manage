@@ -6,7 +6,7 @@ import '@atlaskit/css-reset'
 import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import API from './utils/API';
-
+import Modal from './components/Modal.js'
 
 const Container = styled.div`
   display: flex;
@@ -19,10 +19,15 @@ function App()  {
   const [tasksState, setTasks] = useState({});
   const [columns, setColumns] = useState({});
   const [columnOrder, setColumnOrder] = useState([])
-
-
-  
   const [count, setCount] = useState(0)
+
+  const [showModal, setShowModal] = useState(false)
+
+  const openModal = () => {
+    setShowModal(prev => !prev);
+    console.log(showModal)
+  }
+
 
   useEffect(() => {
     (async () => {
@@ -64,12 +69,7 @@ function App()  {
           }
           
         }
-     
         setColumnOrder(orderArr);
-        
-        // console.log("tasksState", tasksState, "columns", columns, "ColumnOrder", columnOrder)
-        
-        
       })
     })()
      return () => {
@@ -79,7 +79,15 @@ function App()  {
 
   },[count])
 
-
+  const addNewTask = (taskData) => {
+    
+    API.addNewTask(taskData)
+    .then(res => {
+      console.log('task res', res)
+      
+    })
+    .catch(err => console.log("Add New Task Error", err))
+  }
 
   const onDragStart = () => {
     // function to modify attributes of a component on drag start
@@ -175,15 +183,19 @@ function App()  {
         >
         { columnOrder.length > 1 ? (
           
-               
+          <>     
           <Container>
                 
               {columnOrder.map(columnId => {
               const column = columns[columnId]; 
-              return <Column key={column.id} column={column} tasks={column.taskIds} />;
+              return <Column key={column.id} column={column} tasks={column.taskIds} addNewTask={addNewTask} openModal={openModal} />;
               })}
 
           </Container>
+
+          { showModal ? <Modal> </Modal> : null }
+
+          </>
          ) : (
            <p>No Task Data to Load</p>
          )}

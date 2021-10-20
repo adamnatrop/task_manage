@@ -22,6 +22,11 @@ export default {
     getColumnsData: function(){
         return axios.get("/api/user/columnsdata");
     },
+
+    addNewTask: function(taskData){
+        return axios.post("/api/task/", taskData);
+    }
+
     // // get product by id
     // getproduct: function(id) {
     //     return axios.get("/api/product/" + id);

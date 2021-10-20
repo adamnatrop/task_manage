@@ -16,6 +16,10 @@ const Container = styled.div`
 const Title = styled.h3`
     padding: 8px;
 `;
+
+const NewTaskBtn = styled.div`
+    padding-top: 8px;
+`;
 const TaskList = styled.div`
     padding: 8px;
     transition: background-color 0.2s ease;
@@ -29,7 +33,16 @@ export default function Column(props) {
     
         return (
             <Container>
-                <Title>{props.column.title}</Title>
+                <Title>
+                    {props.column.title} 
+                    {/* Conditional Formating for adding new task to first column only */}
+                    {props.column.title === "To Do" && (
+                        <NewTaskBtn>
+                            <button onClick={props.openModal}>Add New Task</button>
+                        </NewTaskBtn>)}
+                </Title>
+               
+                
                 <Droppable 
                     droppableId={props.column.id} 
                     // type={this.props.column.id === 'column-3' ? 'done' : 'active'}
