@@ -193,7 +193,7 @@ function App()  {
 
           </Container>
 
-          { showModal ? <Modal> </Modal> : null }
+          { showModal ? <Modal openModal={openModal}> </Modal> : null }
 
           </>
          ) : (
