@@ -93,7 +93,7 @@ function App()  {
     API.deleteTask(taskId)
     .then( res => {
       console.log('delete task', res)
-      setCount(+1)
+      setCount(count +1)
     })
     .catch(err => console.log('delete task error', err))
 
