@@ -70,7 +70,7 @@ module.exports = {
     },
 
     getColumns: async (req, res) => {
-        console.log('HIT')
+        console.log('getColumns HIT')
        Columns
         .find(req.query)
         .populate("taskIds")

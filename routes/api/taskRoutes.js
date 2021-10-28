@@ -13,8 +13,13 @@ router.route('/:id')
     .put(taskController.update)
     .delete(taskController.remove);
 
-router.route('/task')
-    .post(taskController.addTask)
-    .get(taskController.findAllWithTasks)
+router.route('/taskid')
+    .post(taskController.updateColumnWithTaskId);
+
+router.route('/columnstate')
+    .post(taskController.updateColumnState);
+// router.route('/task')
+//     .post(taskController.addTask)
+//     .get(taskController.findAllWithTasks)
 
 module.exports = router;

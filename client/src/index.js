@@ -89,6 +89,29 @@ function App()  {
     .catch(err => console.log("Add New Task Error", err))
   }
 
+  const deleteTask = (taskId) => {
+    API.deleteTask(taskId)
+    .then( res => {
+      console.log('delete task', res)
+      setCount(+1)
+    })
+    .catch(err => console.log('delete task error', err))
+
+  }
+
+  const updateColumnsDBState = (draggableId, destinationId, sourceId) => {
+    let stateId = {
+      taskId: draggableId,
+      destinationColumnId: destinationId,
+      sourceColumnId: sourceId
+    }
+    API.updateState(stateId)
+    .then(res => {
+      console.log('updateState', res)
+    })
+    .catch(err => console.log('updateState error', err))
+  }
+
   const onDragStart = () => {
     // function to modify attributes of a component on drag start
   }
@@ -168,7 +191,8 @@ function App()  {
       [newFinish.id]: newFinish,
     };
     setColumns(newColumnState);
-    
+
+    updateColumnsDBState(draggableId, destination.droppableId, source.droppableId);
 
   };
 
@@ -188,12 +212,19 @@ function App()  {
                 
               {columnOrder.map(columnId => {
               const column = columns[columnId]; 
-              return <Column key={column.id} column={column} tasks={column.taskIds} addNewTask={addNewTask} openModal={openModal} />;
+              return <Column 
+              key={column.id} 
+              column={column} 
+              tasks={column.taskIds} 
+              addNewTask={addNewTask} 
+              openModal={openModal}  
+              deleteTask={deleteTask}
+              />;
               })}
 
           </Container>
 
-          { showModal ? <Modal openModal={openModal}> </Modal> : null }
+          { showModal ? <Modal openModal={openModal} setCount={setCount} count={count}> </Modal> : null }
 
           </>
          ) : (

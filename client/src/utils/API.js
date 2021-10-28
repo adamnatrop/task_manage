@@ -25,8 +25,19 @@ export default {
 
     addNewTask: function(taskData){
         return axios.post("/api/task/", taskData);
-    }
+    },
 
+    addTaskToColumn: function(taskId){
+        return axios.post("/api/task/taskid", taskId)
+    },
+
+    deleteTask: function(id){
+        return axios.delete("/api/task/" + id);
+    },
+
+    updateState: function(state){
+        return axios.post("/api/task/columnstate", state)
+    }
     // // get product by id
     // getproduct: function(id) {
     //     return axios.get("/api/product/" + id);

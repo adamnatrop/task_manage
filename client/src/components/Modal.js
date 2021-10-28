@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-
+import API from '../utils/API'
 
 const Modal = (props) => {
 
@@ -8,6 +8,22 @@ const Modal = (props) => {
 
     function handleFormSubmit(event) {
         event.preventDefault();
+        if (formObject.newTask) {
+            console.log(typeof(formObject.newTask));
+            API.addNewTask({
+                content: formObject.newTask
+            })
+            .then(res => {
+                console.log('newTask', res)
+                console.log('taskid', res.data._id)
+                API.addTaskToColumn({taskId: res.data._id})
+                .then(res => {
+                    console.log('Added Task')
+                    props.setCount(props.count +1)
+                    console.log(props.count)
+                })
+            })
+        }
         props.openModal();
     };
 

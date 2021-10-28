@@ -55,7 +55,7 @@ export default function Column(props) {
                         >
                             {props.tasks.map((task, index) => (
                                 
-                                <Task key={task._id} task={task} index={index} />
+                                <Task key={task._id} task={task} index={index} deleteTask={props.deleteTask}/>
                             ))}
                             {provided.placeholder}
                         </TaskList>
