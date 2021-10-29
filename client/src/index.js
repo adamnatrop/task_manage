@@ -20,12 +20,13 @@ function App()  {
   const [columns, setColumns] = useState({});
   const [columnOrder, setColumnOrder] = useState([])
   const [count, setCount] = useState(0)
+  const [newTaskColumnId, setNewTaskColumnId] = useState("")
 
   const [showModal, setShowModal] = useState(false)
 
-  const openModal = () => {
+  const openModal = (columnId) => {
     setShowModal(prev => !prev);
-    console.log(showModal)
+    setNewTaskColumnId(columnId);
   }
 
 
@@ -191,7 +192,7 @@ function App()  {
       [newFinish.id]: newFinish,
     };
     setColumns(newColumnState);
-
+    // updates database to current task column state
     updateColumnsDBState(draggableId, destination.droppableId, source.droppableId);
 
   };
@@ -215,8 +216,7 @@ function App()  {
               return <Column 
               key={column.id} 
               column={column} 
-              tasks={column.taskIds} 
-              addNewTask={addNewTask} 
+              tasks={column.taskIds}  
               openModal={openModal}  
               deleteTask={deleteTask}
               />;
@@ -224,7 +224,13 @@ function App()  {
 
           </Container>
 
-          { showModal ? <Modal openModal={openModal} setCount={setCount} count={count}> </Modal> : null }
+          { showModal ? <Modal 
+              openModal={openModal} 
+              setCount={setCount} 
+              count={count}
+              sourceColumnId={newTaskColumnId}
+              > 
+          </Modal> : null }
 
           </>
          ) : (

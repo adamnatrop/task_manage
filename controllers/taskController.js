@@ -58,7 +58,7 @@ module.exports = {
     updateColumnWithTaskId: function(req, res){
         console.log("Controller TaskId", req.body.taskId)
        Columns
-            .findOneAndUpdate({title: "To Do"}, {$push: {taskIds: req.body.taskId}}, {new: true})
+            .findOneAndUpdate({_id: req.body.columnId}, {$push: {taskIds: req.body.taskId}}, {new: true})
             .then(taskData => res.json(taskData))
             .catch(err => res.status(422).json(err));
     },

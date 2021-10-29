@@ -16,7 +16,7 @@ const Modal = (props) => {
             .then(res => {
                 console.log('newTask', res)
                 console.log('taskid', res.data._id)
-                API.addTaskToColumn({taskId: res.data._id})
+                API.addTaskToColumn({taskId: res.data._id, columnId: props.sourceColumnId})
                 .then(res => {
                     console.log('Added Task')
                     props.setCount(props.count +1)
